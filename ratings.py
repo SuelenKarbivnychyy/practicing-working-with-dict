@@ -15,10 +15,12 @@ def rating(file):
     rates = {}
     restaurante_rate_file = open(file)
     valid_rates = "12345"
+    
 
     for line in restaurante_rate_file:
         restaurante = line.rstrip().split(":")        
         rates[restaurante[0]] = restaurante[1]
+          
 
     while True:  
         question = input("\n Type 'see' if you want to see all the ratings, \n Type 'add' if you want to add a new restaurante and rating it, \n If you want to update a rating type 'update' \n or type 'q' to quit the program: ")
@@ -38,9 +40,14 @@ def rating(file):
             for key, value in sorted(rates.items()):    
                 print(key,value) 
 
-        elif question == "update" or question == "Update":
-            rate_to_update = random.choice()
-            print(rate_to_update)        
+        elif question == "update" or question == "Update":  
+            key, value = random.choice(list(rates.items()))    
+
+            print(f"The chosem restaurante is {key}, {value}")    
+            update_rate = input("what's the new rating for this restaurante? ")                   
+            rates[key] = update_rate            
+            print(f" the new rate for the {key} restaurante is: {update_rate}")
+
 
 file = sys.argv[1]
 rating(file)        
